@@ -8,6 +8,9 @@ import { useRouter } from "next/navigation";
 export default function NewRecipePage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [ingredients, setIngredients] = useState("");
+  const [cookingTime, setCookingTime] = useState("");
+  const [servings, setServings] = useState("");
   const [image, setImage] = useState(null);
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
@@ -44,6 +47,9 @@ export default function NewRecipePage() {
       await addDoc(collection(db, "recipes"), {
         title,
         description,
+        ingredients,
+        cookingTime,
+        servings,
         imageUrl,
         userId: user.uid,
         createdAt: serverTimestamp(),
@@ -74,6 +80,27 @@ export default function NewRecipePage() {
           onChange={(e) => setTitle(e.target.value)}
           className="border p-2 rounded"
           required
+        />
+        <textarea
+          placeholder="Ingredienser (en per rad)"
+          value={ingredients}
+          onChange={(e) => setIngredients(e.target.value)}
+          className="border p-2 rounded"
+          rows={4}
+        />
+        <input
+          type="text"
+          placeholder="Tillagningstid (t.ex. 30 min)"
+          value={cookingTime}
+          onChange={(e) => setCookingTime(e.target.value)}
+          className="border p-2 rounded"
+        />
+        <input
+          type="text"
+          placeholder="Antal portioner"
+          value={servings}
+          onChange={(e) => setServings(e.target.value)}
+          className="border p-2 rounded"
         />
         <textarea
           placeholder="Beskrivning"
