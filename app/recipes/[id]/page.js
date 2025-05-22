@@ -57,8 +57,11 @@ export default function RecipeDetailPage() {
         <span className="font-semibold">Beskrivning:</span>
         <p>{recipe.description}</p>
       </div>
-      <Link href="/recipes" className="text-[#D64545] underline">
-        Tillbaka till mina recept
+      <Link
+        href="/recipes"
+        className="bg-[#D64545] text-white px-4 py-2 rounded mb-6 inline-block hover:bg-[#B53939]"
+      >
+        Tillbaka
       </Link>
     </div>
   );
