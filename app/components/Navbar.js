@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { auth } from "../services/firebase";
+import { MdFavoriteBorder } from "react-icons/md";
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
@@ -17,8 +18,8 @@ export default function Navbar() {
         CookNest
       </Link>
       <div className="flex gap-4 items-center">
-        <Link href="/recipes" className="hover:underline">
-          Mina recept
+        <Link href="/recipes/favorites">
+          <MdFavoriteBorder className="inline-block text-2xl hover:text-red-900" />
         </Link>
         {user ? (
           <button

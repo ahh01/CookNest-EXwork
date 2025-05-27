@@ -1,7 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import { db, auth } from "../services/firebase";
-import { collection,query,where,getDocs,doc,deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import Link from "next/link";
 import RecipeCard from "../components/RecipeCard";
 
@@ -9,6 +16,7 @@ export default function RecipesPage() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((u) => setUser(u));
@@ -32,6 +40,19 @@ export default function RecipesPage() {
     fetchRecipes();
   }, [user]);
 
+  useEffect(() => {
+    if (!user) return;
+    const fetchFavorites = async () => {
+      const favQuery = query(
+        collection(db, "favorites"),
+        where("userId", "==", user.uid)
+      );
+      const favSnapshot = await getDocs(favQuery);
+      setFavorites(favSnapshot.docs.map((doc) => doc.data().recipeId));
+    };
+    fetchFavorites();
+  }, [user]);
+
   const handleDelete = async (id) => {
     if (confirm("Vill du verkligen ta bort detta recept?")) {
       await deleteDoc(doc(db, "recipes", id));
@@ -52,30 +73,40 @@ export default function RecipesPage() {
 
   return (
     <div className="min-h-screen bg-[#FFF8F0]">
-    <div className="max-w-2xl mx-auto p-8">
-      <h1 className="text-2xl font-bold mb-4">Mina recept</h1>
-      <Link
-        href="/recipes/new"
-        className="bg-[#D64545] text-white px-4 py-2 rounded mb-6 inline-block hover:bg-[#B53939]"
-      >
-        Lägg till nytt recept
-      </Link>
-      {loading ? (
-        <p>Laddar...</p>
-      ) : recipes.length === 0 ? (
-        <p>Du har inga recept ännu.</p>
-      ) : (
-        <ul className="space-y-4">
-          {recipes.map((recipe) => (
-            <RecipeCard
-              key={recipe.id}
-              recipe={recipe}
-              onDelete={handleDelete}
-            />
-          ))}
-        </ul>
-      )}
-    </div>
+      <div className="max-w-2xl mx-auto p-8">
+        <h1 className="text-2xl font-bold mb-4">Mina recept</h1>
+        <Link
+          href="/recipes/new"
+          className="bg-[#D64545] text-white px-4 py-2 rounded mb-6 inline-block hover:bg-[#B53939]"
+        >
+          Lägg till nytt recept
+        </Link>
+        {loading ? (
+          <p>Laddar...</p>
+        ) : recipes.length === 0 ? (
+          <p>Du har inga recept ännu.</p>
+        ) : (
+          <ul className="space-y-4">
+            {recipes.map((recipe) => (
+              <RecipeCard
+                key={recipe.id}
+                recipe={recipe}
+                onDelete={handleDelete}
+                userId={user.uid}
+                isFavorite={favorites.includes(recipe.id)}
+                onFavoriteChange={(fav) => {
+                  // Uppdatera favoriter direkt i state om du vill
+                  setFavorites((prev) =>
+                    fav
+                      ? [...prev, recipe.id]
+                      : prev.filter((id) => id !== recipe.id)
+                  );
+                }}
+              />
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
