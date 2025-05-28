@@ -28,12 +28,6 @@ export default function RecipeCard({
       </Link>
       <div className="flex items-center justify-between mt-2">
         <div className="flex items-center gap-2">
-          <Link
-            href={`/recipes/edit/${recipe.id}`}
-            className="bg-[#F4B400] text-[#3E2F1C] px-3 py-1 rounded hover:bg-[#DFA000]"
-          >
-            Redigera
-          </Link>
           <FavoriteButton
             recipeId={recipe.id}
             userId={userId}

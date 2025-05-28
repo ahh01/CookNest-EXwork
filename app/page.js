@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { auth } from "./services/firebase";
+import Image from "next/image";
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -12,8 +13,16 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-8 p-8 bg-[#FFF8F0]">
-      <h1 className="text-3xl font-bold">CookNest</h1>
+    <div className="flex flex-col items-center justify-start min-h-screen gap-8 p-8 relative">
+      <Image
+        src="/räka.png"
+        alt="Bakgrund"
+        fill
+        className="object-cover -z-10"
+        quality={100}
+      />
+      <div className="mt-16" />
+      <h1 className="text-5xl text-[#D64545] font-bold">CookNest</h1>
       <p className="text-lg text-center max-w-xl">
         Spara, organisera och hitta dina favoritrecept. Skapa konto, logga in
         och börja samla dina bästa matupplevelser!
@@ -27,12 +36,12 @@ export default function Home() {
             >
               Mina recept
             </Link>
-            <button
-              onClick={() => auth.signOut()}
+            <Link
+              href="/recipes/new"
               className="bg-[#D64545] text-white px-4 py-2 rounded hover:bg-[#B53939]"
             >
-              Logga ut
-            </button>
+              Lägg till nytt recept
+            </Link>
           </>
         ) : (
           <Link

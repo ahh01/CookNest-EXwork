@@ -80,7 +80,7 @@ export default function RecipesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FFF8F0]">
+    <div className="min-h-screen">
       <div className="max-w-2xl mx-auto p-8">
         <h1 className="text-2xl font-bold mb-4">Mina recept</h1>
         <input

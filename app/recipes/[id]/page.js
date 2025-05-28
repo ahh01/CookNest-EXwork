@@ -67,12 +67,20 @@ export default function RecipeDetailPage() {
           <p>{recipe.description}</p>
         </div>
       </div>
-      <Link
-        href="/recipes"
-        className="mt-8 inline-block bg-[#D64545] text-white px-4 py-2 rounded hover:bg-[#B53939]"
-      >
-        Tillbaka
-      </Link>
+      <div className="flex justify-between mt-8">
+        <Link
+          href={`/recipes/edit/${recipe.id}`}
+          className="bg-[#F4B400] text-[#3E2F1C] px-4 py-2 rounded hover:bg-[#DFA000]"
+        >
+          Redigera
+        </Link>
+        <Link
+          href="/recipes"
+          className="bg-[#D64545] text-white px-4 py-2 rounded hover:bg-[#B53939]"
+        >
+          Tillbaka
+        </Link>
+      </div>
     </div>
   );
 }
