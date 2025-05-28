@@ -20,7 +20,11 @@ export default function RecipeCard({
           />
         )}
         <h2 className="text-xl font-semibold">{recipe.title}</h2>
-        <p>{recipe.description}</p>
+        <p>
+          {recipe.description.length > 80
+            ? recipe.description.slice(0, 80) + "..." // Displaya kortare beskrivning
+            : recipe.description}
+        </p>
       </Link>
       <div className="flex items-center justify-between mt-2">
         <div className="flex items-center gap-2">

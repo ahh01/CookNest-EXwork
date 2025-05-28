@@ -67,8 +67,11 @@ export default function FavoritesPage() {
         <p>Du har inga favoritrecept ännu.</p>
       ) : (
         <ul className="space-y-4">
-          {favorites.map(recipe => (
-            <li key={recipe.id} className="p-4 bg-white rounded shadow flex gap-4 items-center">
+          {favorites.map((recipe) => (
+            <li
+              key={recipe.id}
+              className="p-4 bg-white rounded shadow flex gap-4 items-center"
+            >
               {recipe.imageUrl && (
                 <img
                   src={recipe.imageUrl}
@@ -79,7 +82,8 @@ export default function FavoritesPage() {
               <div className="flex-1">
                 <Link href={`/recipes/${recipe.id}`}>
                   <h2 className="text-xl font-semibold">{recipe.title}</h2>
-                  <p>{recipe.description}</p>
+                  {recipe.description.split(" ").slice(0, 10).join(" ")}
+                  {recipe.description.split(" ").length > 10 && "..."}
                 </Link>
               </div>
               <button

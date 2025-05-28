@@ -17,6 +17,7 @@ export default function RecipesPage() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [favorites, setFavorites] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((u) => setUser(u));
@@ -60,6 +61,13 @@ export default function RecipesPage() {
     }
   };
 
+  // Filtrera recepten baserat på sökord (titel eller beskrivning)
+  const filteredRecipes = recipes.filter(
+    (recipe) =>
+      recipe.title.toLowerCase().includes(search.toLowerCase()) ||
+      recipe.description.toLowerCase().includes(search.toLowerCase())
+  );
+
   if (!user) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
@@ -75,6 +83,13 @@ export default function RecipesPage() {
     <div className="min-h-screen bg-[#FFF8F0]">
       <div className="max-w-2xl mx-auto p-8">
         <h1 className="text-2xl font-bold mb-4">Mina recept</h1>
+        <input
+          type="text"
+          placeholder="Sök recept..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full mb-4 p-2 border rounded"
+        />
         <Link
           href="/recipes/new"
           className="bg-[#D64545] text-white px-4 py-2 rounded mb-6 inline-block hover:bg-[#B53939]"
@@ -87,7 +102,7 @@ export default function RecipesPage() {
           <p>Du har inga recept ännu.</p>
         ) : (
           <ul className="space-y-4">
-            {recipes.map((recipe) => (
+            {filteredRecipes.map((recipe) => (
               <RecipeCard
                 key={recipe.id}
                 recipe={recipe}
@@ -95,7 +110,6 @@ export default function RecipesPage() {
                 userId={user.uid}
                 isFavorite={favorites.includes(recipe.id)}
                 onFavoriteChange={(fav) => {
-                  // Uppdatera favoriter direkt i state om du vill
                   setFavorites((prev) =>
                     fav
                       ? [...prev, recipe.id]
