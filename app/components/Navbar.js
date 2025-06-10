@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <nav className="w-full bg-[#D64545] text-white px-6 py-3 flex justify-between items-center shadow">
       <Link href="/" className="font-bold text-xl">
-        CookNest
+        DishNest
       </Link>
       <div className="flex gap-4 items-center">
         <Link href="/recipes/favorites">

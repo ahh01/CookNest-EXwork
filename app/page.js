@@ -22,7 +22,7 @@ export default function Home() {
         quality={100}
       />
       <div className="mt-16" />
-      <h1 className="text-5xl text-[#D64545] font-bold">CookNest</h1>
+      <h1 className="text-5xl text-[#D64545] font-bold">DishNest</h1>
       <p className="text-lg text-center max-w-xl">
         Spara, organisera och hitta dina favoritrecept. Skapa konto, logga in
         och börja samla dina bästa matupplevelser!
@@ -32,13 +32,13 @@ export default function Home() {
           <>
             <Link
               href="/recipes"
-              className="bg-[#D64545] text-white px-4 py-2 rounded hover:bg-[#B53939]"
+              className="bg-[#F4B400] text-[#3E2F1C] px-4 py-2 rounded-md hover:bg-[#DFA000]"
             >
               Mina recept
             </Link>
             <Link
               href="/recipes/new"
-              className="bg-[#D64545] text-white px-4 py-2 rounded hover:bg-[#B53939]"
+              className="bg-[#718355] text-white px-4 py-2 rounded hover:bg-[#5C6C47]"
             >
               Lägg till nytt recept
             </Link>

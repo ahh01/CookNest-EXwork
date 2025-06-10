@@ -4,6 +4,7 @@ import { db, auth, storage } from "../../services/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useRouter } from "next/navigation";
+import { PiKeyReturn } from "react-icons/pi";
 
 export default function NewRecipePage() {
   const [title, setTitle] = useState("");
@@ -108,6 +109,9 @@ export default function NewRecipePage() {
           onChange={(e) => setDescription(e.target.value)}
           className="border p-2 rounded"
         />
+        <label className="font-semibold mt-2" htmlFor="image-upload">
+          Lägg till bild
+        </label>
         <input
           type="file"
           accept="image/*"
@@ -115,13 +119,22 @@ export default function NewRecipePage() {
           className="border p-2 rounded"
         />
         {error && <p className="text-red-500">{error}</p>}
-        <button
-          type="submit"
-          disabled={uploading}
-          className="bg-[#D64545] text-white px-4 py-2 rounded hover:bg-[#B53939]"
-        >
-          {uploading ? "Laddar upp..." : "Spara recept"}
-        </button>
+        <div className="flex gap-4 justify-between">
+          <button
+            type="submit"
+            disabled={uploading}
+            className="bg-[#718355] text-white px-4 py-2 rounded hover:bg-[#5C6C47]"
+          >
+            {uploading ? "Laddar upp..." : "Spara recept"}
+          </button>
+          <button
+            onClick={() => router.back()}
+            className="flex items-center bg-[#E0D9D2] px-4 py-2 rounded hover:bg-[#CFC6BD]"
+            type="button"
+          >
+            Tillbaka
+          </button>
+        </div>
       </form>
     </div>
   );

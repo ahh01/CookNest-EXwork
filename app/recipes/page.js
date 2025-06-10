@@ -81,27 +81,29 @@ export default function RecipesPage() {
 
   return (
     <div className="min-h-screen">
-      <div className="max-w-2xl mx-auto p-8">
-        <h1 className="text-2xl font-bold mb-4">Mina recept</h1>
+      <div className="max-w-5xl ml-0 p-8">
+        <h1 className="text-2xl font-bold mb-4 text-left">Mina recept</h1>
         <input
           type="text"
           placeholder="Sök recept..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full mb-4 p-2 border rounded"
+          className="w-full md:w-96 max-w-full mb-2 p-2 border rounded text-left"
         />
-        <Link
-          href="/recipes/new"
-          className="bg-[#D64545] text-white px-4 py-2 rounded mb-6 inline-block hover:bg-[#B53939]"
-        >
-          Lägg till nytt recept
-        </Link>
+        <div className="mb-4">
+          <Link
+            href="/recipes/new"
+            className="bg-[#718355] text-white px-4 py-2 rounded hover:bg-[#5C6C47] inline-block"
+          >
+            Lägg till nytt recept
+          </Link>
+        </div>
         {loading ? (
           <p>Laddar...</p>
         ) : recipes.length === 0 ? (
           <p>Du har inga recept ännu.</p>
         ) : (
-          <ul className="space-y-4">
+          <ul className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
             {filteredRecipes.map((recipe) => (
               <RecipeCard
                 key={recipe.id}

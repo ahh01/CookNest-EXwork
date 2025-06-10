@@ -95,32 +95,6 @@ export default function EditRecipePage() {
           />
         </div>
         <div>
-          <label className="block mb-1 font-semibold">Beskrivning</label>
-          <textarea
-            name="description"
-            value={form.description}
-            onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
-            required
-          />
-        </div>
-        <div>
-          <label className="block mb-1 font-semibold">Nuvarande bild</label>
-          {form.imageUrl && (
-            <img
-              src={form.imageUrl}
-              alt="Nuvarande bild"
-              className="mb-2 w-full max-h-48 object-cover rounded"
-            />
-          )}
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="w-full border rounded px-3 py-2"
-          />
-        </div>
-        <div>
           <label className="block mb-1 font-semibold">
             Ingredienser (en per rad)
           </label>
@@ -150,12 +124,47 @@ export default function EditRecipePage() {
             className="w-full border rounded px-3 py-2"
           />
         </div>
-        <button
-          type="submit"
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
-        >
-          Spara ändringar
-        </button>
+        <div>
+          <label className="block mb-1 font-semibold">Beskrivning</label>
+          <textarea
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+            className="w-full border rounded px-3 py-2"
+            required
+          />
+        </div>
+        <div>
+          <label className="block mb-1 font-semibold">Nuvarande bild</label>
+          {form.imageUrl && (
+            <img
+              src={form.imageUrl}
+              alt="Nuvarande bild"
+              className="mb-2 w-full max-h-48 object-cover rounded"
+            />
+          )}
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="w-full border rounded px-3 py-2"
+          />
+        </div>
+        <div className="flex gap-4 justify-between">
+          <button
+            type="submit"
+            className="bg-[#718355] text-white px-4 py-2 rounded hover:bg-[#5C6C47]"
+          >
+            Spara ändringar
+          </button>
+          <button
+            type="button"
+            onClick={() => router.back()}
+            className="flex items-center bg-[#E0D9D2] px-4 py-2 rounded hover:bg-[#CFC6BD]"
+          >
+            Tillbaka
+          </button>
+        </div>
       </form>
     </div>
   );

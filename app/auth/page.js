@@ -32,7 +32,7 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#FFF8F0]">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       <form
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded border border-[#E6DCD2] shadow-md w-full max-w-xs flex flex-col gap-4"

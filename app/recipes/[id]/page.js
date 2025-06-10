@@ -26,10 +26,10 @@ export default function RecipeDetailPage() {
   if (!recipe) return <div className="p-8">Receptet hittades inte.</div>;
 
   return (
-    <div className="max-w-4xl mx-auto p-10 bg-white rounded shadow">
+    <div className="max-w-4xl mx-auto mt-10 mb-10 p-10 bg-white rounded shadow ">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Ruta 1: Bild */}
-        <div className="rounded overflow-hidden flex items-center justify-center bg-gray-100 min-h-[200px]">
+        <div className="rounded overflow-hidden flex items-center justify-center bg-[#faf9f4] min-h-[200px]">
           {recipe.imageUrl && (
             <img
               src={recipe.imageUrl}
@@ -39,7 +39,7 @@ export default function RecipeDetailPage() {
           )}
         </div>
         {/* Ruta 2: Portioner & tid */}
-        <div className="flex flex-col justify-center h-full p-4 bg-gray-50 rounded">
+        <div className="flex flex-col justify-center h-full p-4 bg-[#faf9f4] rounded">
           <h1 className="text-3xl font-bold mb-2">{recipe.title}</h1>
           <div className="text-gray-700 mb-2">
             <span className="font-semibold">Tillagningstid:</span>{" "}
@@ -50,7 +50,7 @@ export default function RecipeDetailPage() {
           </div>
         </div>
         {/* Ruta 3: Ingredienser */}
-        <div className="bg-gray-50 rounded p-4">
+        <div className="bg-[#faf9f4] rounded p-4">
           <h2 className="text-xl font-semibold mb-2">Ingredienser</h2>
           <ul className="list-disc list-inside">
             {(recipe.ingredients || "")
@@ -62,7 +62,7 @@ export default function RecipeDetailPage() {
           </ul>
         </div>
         {/* Ruta 4: Beskrivning */}
-        <div className="bg-gray-50 rounded p-4">
+        <div className="bg-[#faf9f4] rounded p-4">
           <h2 className="text-xl font-semibold mb-2">Beskrivning</h2>
           <p>{recipe.description}</p>
         </div>
@@ -76,7 +76,7 @@ export default function RecipeDetailPage() {
         </Link>
         <Link
           href="/recipes"
-          className="bg-[#D64545] text-white px-4 py-2 rounded hover:bg-[#B53939]"
+          className="bg-[#E0D9D2] px-4 py-2 rounded hover:bg-[#CFC6BD]"
         >
           Tillbaka
         </Link>

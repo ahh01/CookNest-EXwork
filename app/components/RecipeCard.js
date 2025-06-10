@@ -10,7 +10,7 @@ export default function RecipeCard({
   onFavoriteChange,
 }) {
   return (
-    <li className="p-4 bg-white rounded shadow hover:bg-gray-50 transition">
+    <li className="p-4 bg-white rounded shadow hover:bg-gray-50 transition flex flex-col h-full">
       <Link href={`/recipes/${recipe.id}`}>
         {recipe.imageUrl && (
           <img
@@ -22,11 +22,11 @@ export default function RecipeCard({
         <h2 className="text-xl font-semibold">{recipe.title}</h2>
         <p>
           {recipe.description.length > 80
-            ? recipe.description.slice(0, 80) + "..." // Displaya kortare beskrivning
+            ? recipe.description.slice(0, 80) + "..."
             : recipe.description}
         </p>
       </Link>
-      <div className="flex items-center justify-between mt-2">
+      <div className="flex items-center justify-between mt-auto pt-4">
         <div className="flex items-center gap-2">
           <FavoriteButton
             recipeId={recipe.id}
@@ -37,7 +37,7 @@ export default function RecipeCard({
         </div>
         <button
           onClick={() => onDelete(recipe.id)}
-          className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700"
+          className="bg-[#D64545] text-white px-3 py-1 rounded hover:bg-[#B53939]"
         >
           Ta bort
         </button>
