@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { VscAccount } from "react-icons/vsc";
 
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState([]);
@@ -59,11 +60,19 @@ export default function FavoritesPage() {
 
   if (!user) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <p>Du måste vara inloggad för att se dina favoriter.</p>
-        <Link href="/auth" className="text-blue-600 underline">
-          Logga in
-        </Link>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-[#faf9f4]">
+        <div className="bg-white p-8 rounded shadow flex flex-col items-center">
+          <VscAccount className="text-6xl text-[#D64545] mb-4" />
+          <p className="mb-4 text-lg text-gray-700 text-center">
+            Du måste vara inloggad för att se dina favoriter.
+          </p>
+          <Link
+            href="/auth"
+            className="bg-[#D64545] text-white px-6 py-2 rounded hover:bg-[#B53939] font-semibold transition"
+          >
+            Logga in
+          </Link>
+        </div>
       </div>
     );
   }
@@ -75,39 +84,41 @@ export default function FavoritesPage() {
       </div>
       {loading ? (
         <p>Laddar...</p>
-      ) : favorites.length === 0 ? (
-        <p>Du har inga favoritrecept ännu.</p>
       ) : (
         <>
-          <ul className="space-y-4">
-            {favorites.map((recipe) => (
-              <li
-                key={recipe.id}
-                className="p-4 bg-white rounded shadow flex flex-col md:flex-row gap-4 items-center"
-              >
-                {recipe.imageUrl && (
-                  <img
-                    src={recipe.imageUrl}
-                    alt={recipe.title}
-                    className="w-full h-40 md:w-24 md:h-24 object-cover rounded"
-                  />
-                )}
-                <div className="flex-1 w-full">
-                  <Link href={`/recipes/${recipe.id}`}>
-                    <h2 className="text-xl font-semibold">{recipe.title}</h2>
-                    {recipe.description.split(" ").slice(0, 10).join(" ")}
-                    {recipe.description.split(" ").length > 10 && "..."}
-                  </Link>
-                </div>
-                <button
-                  onClick={() => handleRemoveFavorite(recipe.favId)}
-                  className=" bg-[#D64545] text-white px-3 py-1 rounded hover:bg-[#B53939] w-full md:w-auto"
+          {favorites.length === 0 ? (
+            <p>Du har inga favoritrecept ännu.</p>
+          ) : (
+            <ul className="space-y-4">
+              {favorites.map((recipe) => (
+                <li
+                  key={recipe.id}
+                  className="p-4 bg-white rounded shadow flex flex-col md:flex-row gap-4 items-center"
                 >
-                  Ta bort
-                </button>
-              </li>
-            ))}
-          </ul>
+                  {recipe.imageUrl && (
+                    <img
+                      src={recipe.imageUrl}
+                      alt={recipe.title}
+                      className="w-full h-40 md:w-24 md:h-24 object-cover rounded"
+                    />
+                  )}
+                  <div className="flex-1 w-full">
+                    <Link href={`/recipes/${recipe.id}`}>
+                      <h2 className="text-xl font-semibold">{recipe.title}</h2>
+                      {recipe.description.split(" ").slice(0, 10).join(" ")}
+                      {recipe.description.split(" ").length > 10 && "..."}
+                    </Link>
+                  </div>
+                  <button
+                    onClick={() => handleRemoveFavorite(recipe.favId)}
+                    className=" bg-[#D64545] text-white px-3 py-1 rounded hover:bg-[#B53939] w-full md:w-auto"
+                  >
+                    Ta bort
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
           <div className="flex justify-end mt-8">
             <button
               onClick={() => router.back()}

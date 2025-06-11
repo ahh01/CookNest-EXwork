@@ -71,7 +71,7 @@ export default function EditRecipePage() {
         ...form,
         imageUrl,
       });
-      router.push("/recipes");
+      router.push(`/recipes/${id}`);
     } catch {
       setError("Kunde inte spara ändringar.");
     }
